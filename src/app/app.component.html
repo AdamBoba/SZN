@@ -3,6 +3,10 @@
 </mat-toolbar>
 <div class="main-container">
   <app-habit-form (habitAdded)="onHabitAdded($event)"></app-habit-form>
-  <app-habits [habits]="habits"></app-habits>
+  <app-habits
+    [habits]="habits"
+    (habitToggled)="onHabitToggled($event)"
+    (habitRemove)="onHabitRemove($event)">
+  </app-habits>
   <router-outlet></router-outlet>
 </div>

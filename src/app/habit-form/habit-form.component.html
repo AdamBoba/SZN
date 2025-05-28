@@ -1,6 +1,6 @@
 <mat-card>
-    <mat-card-title>Dodaj nawyk</mat-card-title>
-    <mat-form-field appearance="fill" style="width: 100%;">
+    <div mat-card-title>Dodaj nawyk</div>
+    <mat-form-field appearance="fill">
       <mat-label>Nazwa nawyku</mat-label>
       <input matInput [(ngModel)]="habitName" (keyup.enter)="addHabit()" />
     </mat-form-field>

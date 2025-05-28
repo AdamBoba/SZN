@@ -1,3 +1,91 @@
 mat-card {
-    margin-bottom: 20px;
+    border-radius: 18px;
+    box-shadow: 0 4px 28px 0 rgba(33, 150, 243, 0.10);
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    background: #f7f7fa;
   }
+  
+  [mat-card-title], .mat-card-title {
+    color: #1976d2;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    font-size: 1.12rem;
+    margin-top: 8px;
+  }
+  
+  .empty-state {
+    color: #b0b6be;
+    font-style: italic;
+    text-align: center;
+    margin: 30px 0;
+    font-size: 1.1rem;
+  }
+  
+  mat-list {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  mat-list-item {
+    padding: 0 !important;
+    background: transparent;
+  }
+  
+  .habit-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 7px 0 rgba(33, 150, 243, 0.07);
+    padding: 12px 20px;
+    margin-bottom: 12px;
+  }
+  
+  .left-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    overflow: hidden;
+    flex: 1;
+  }
+  
+  mat-checkbox {
+    margin: 0;
+  }
+  
+  .habit-name {
+    font-weight: 500;
+    color: #222;
+    font-size: 1.13em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .right-group {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* było 16px */
+    margin-right: 40px; /* lekko przesuwa w lewo */
+  }
+  
+  
+  .streak {
+    color: #ff9800;
+    font-weight: 500;
+    font-size: 1.1em;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  button[mat-icon-button] {
+    color: #d32f2f;
+    margin: 0;
+  }
+  
