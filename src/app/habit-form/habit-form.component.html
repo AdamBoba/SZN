@@ -1,1 +1,6 @@
-<p>habit-form works!</p>
+<h3>Dodaj nowy nawyk</h3>
+<form (ngSubmit)="addHabit()">
+  <input type="text" [(ngModel)]="name" name="name" placeholder="Nazwa nawyku" required />
+  <input type="text" [(ngModel)]="description" name="description" placeholder="Opis" />
+  <button type="submit">Dodaj</button>
+</form>
