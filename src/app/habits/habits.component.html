@@ -1,1 +1,9 @@
-<p>habits works!</p>
+<!-- Add necessary Angular Material modules imports -->
+<mat-card>
+        <div mat-card-title>Twoje nawyki</div>
+        <mat-list>
+            <mat-list-item *ngFor="let habit of habits">
+        {{ habit.name }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card>

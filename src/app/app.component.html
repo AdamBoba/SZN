@@ -1,3 +1,8 @@
-<h1>Aplikacja do zarządzania nawykami</h1>
-<app-habit-form></app-habit-form>
-<app-habits></app-habits>
+<mat-toolbar color="primary">
+  <span>System Zarządzania Nawykami</span>
+</mat-toolbar>
+<div class="main-container">
+  <app-habit-form (habitAdded)="onHabitAdded($event)"></app-habit-form>
+  <app-habits [habits]="habits"></app-habits>
+  <router-outlet></router-outlet>
+</div>

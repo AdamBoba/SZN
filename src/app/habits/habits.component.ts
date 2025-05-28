@@ -1,25 +1,20 @@
-import { Component } from '@angular/core';
-import { HabitService } from '../habit.service';
-import { Habit } from '../models/habit.model';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { Habit } from '../app.component';
 
 @Component({
   selector: 'app-habits',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatListModule
+  ],
   templateUrl: './habits.component.html',
+  styleUrls: ['./habits.component.css']
 })
 export class HabitsComponent {
-  habits: Habit[];
-
-  constructor(private habitService: HabitService) {
-    this.habits = this.habitService.getHabits();
-  }
-
-  toggleComplete(habit: Habit) {
-    const today = new Date().toISOString().slice(0, 10);
-    this.habitService.toggleHabit(habit.id, today);
-  }
-
-  removeHabit(habit: Habit) {
-    this.habitService.removeHabit(habit.id);
-    this.habits = this.habitService.getHabits();
-  }
+  @Input() habits: Habit[] = [];
 }

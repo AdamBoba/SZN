@@ -1,6 +1,8 @@
-<h3>Dodaj nowy nawyk</h3>
-<form (ngSubmit)="addHabit()">
-  <input type="text" [(ngModel)]="name" name="name" placeholder="Nazwa nawyku" required />
-  <input type="text" [(ngModel)]="description" name="description" placeholder="Opis" />
-  <button type="submit">Dodaj</button>
-</form>
+<mat-card>
+    <mat-card-title>Dodaj nawyk</mat-card-title>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Nazwa nawyku</mat-label>
+      <input matInput [(ngModel)]="habitName" (keyup.enter)="addHabit()" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addHabit()">Dodaj</button>
+  </mat-card>
