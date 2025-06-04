@@ -5,6 +5,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Badge, BADGES } from './models/badges.model';
+import { WheelOfMotivationComponent } from './wheel-of-motivation/wheel-of-motivation.component';
+import { WheelPrize } from './models/wheel.model';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,8 @@ import { Badge, BADGES } from './models/badges.model';
     RouterOutlet,
     MatToolbarModule,
     HabitFormComponent,
-    HabitsComponent
+    HabitsComponent,
+    WheelOfMotivationComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -22,12 +25,22 @@ import { Badge, BADGES } from './models/badges.model';
 export class AppComponent {
   habits: Habit[] = [];
   badges: Badge[] = [];
+  xp = 0;
+  lastSpinDay: string | null = null;
+  lastQuote: string | null = null;
+  today = new Date().toISOString().slice(0, 10);
 
   constructor() {
     const stored = localStorage.getItem('habits');
     this.habits = stored ? JSON.parse(stored) : [];
     const storedBadges = localStorage.getItem('badges');
     this.badges = storedBadges ? JSON.parse(storedBadges) : [];
+    const storedXP = localStorage.getItem('xp');
+    this.xp = storedXP ? +storedXP : 0;
+    const storedSpin = localStorage.getItem('lastSpinDay');
+    this.lastSpinDay = storedSpin ? storedSpin : null;
+    const storedQuote = localStorage.getItem('lastQuote');
+    this.lastQuote = storedQuote ? storedQuote : null;
     this.checkBadges();
   }
 
@@ -43,7 +56,7 @@ export class AppComponent {
 
   onHabitToggled(index: number) {
     const habit = this.habits[index];
-    const today = new Date().toISOString().slice(0, 10);
+    const today = this.today;
 
     if (habit.lastDoneDate === today) {
       habit.lastDoneDate = null;
@@ -71,9 +84,32 @@ export class AppComponent {
     this.checkBadges();
   }
 
+  get allDoneToday(): boolean {
+    if (!this.habits.length) return false;
+    return this.habits.every(h => h.lastDoneDate === this.today);
+  }
+
+  onWheelPrize(prize: WheelPrize) {
+    if (prize.type === 'xp') {
+      this.xp += +prize.value;
+    }
+    if (prize.type === 'badge') {
+      if (!this.badges.some(b => b.id === prize.value))
+        this.badges.push({ id: prize.value as string, name: prize.label, icon: '🎉', description: prize.label, condition: () => false });
+    }
+    if (prize.type === 'quote') {
+      this.lastQuote = prize.value as string;
+    }
+    this.lastSpinDay = this.today;
+    this.save();
+  }
+
   private save() {
     localStorage.setItem('habits', JSON.stringify(this.habits));
     localStorage.setItem('badges', JSON.stringify(this.badges));
+    localStorage.setItem('xp', this.xp.toString());
+    localStorage.setItem('lastSpinDay', this.lastSpinDay ?? '');
+    localStorage.setItem('lastQuote', this.lastQuote ?? '');
   }
 
   private checkBadges() {

@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
   <span>System Zarządzania Nawykami</span>
+  <span style="flex:1 1 auto"></span>
+  <span style="font-size: 1.1em; margin-right: 16px;">XP: {{ xp }}</span>
 </mat-toolbar>
 <div class="main-container">
   <app-habit-form (habitAdded)="onHabitAdded($event)"></app-habit-form>
@@ -8,6 +10,10 @@
     (habitToggled)="onHabitToggled($event)"
     (habitRemove)="onHabitRemove($event)">
   </app-habits>
+  <app-wheel-of-motivation
+    [canSpin]="allDoneToday && lastSpinDay !== today"
+    (prizeWon)="onWheelPrize($event)">
+  </app-wheel-of-motivation>
   <div class="badges" *ngIf="badges.length">
     <h3>Odznaki:</h3>
     <div class="badges-list">

@@ -1,0 +1,10 @@
+<div class="wheel-container">
+    <button (click)="spin()" [disabled]="!canSpin || spinning" class="wheel-btn">
+      Zakręć Kołem!
+    </button>
+    <div *ngIf="result" class="wheel-result">
+      <span *ngIf="result.type === 'xp'">Wygrałeś {{ result.label }}!</span>
+      <span *ngIf="result.type === 'badge'">Otrzymujesz {{ result.label }}!</span>
+      <span *ngIf="result.type === 'quote'">Motywacja: "{{ result.value }}"</span>
+    </div>
+  </div>
