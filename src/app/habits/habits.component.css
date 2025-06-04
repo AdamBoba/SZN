@@ -1,97 +1,84 @@
-mat-card {
-  border-radius: 18px;
-  box-shadow: 0 4px 28px 0 rgba(33, 150, 243, 0.10);
-  margin-bottom: 0;
-  padding-bottom: 10px;
-  background: #f7f7fa;
+.garden {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin: 30px 0 36px 0;
 }
 
-[mat-card-title], .mat-card-title {
-  color: #1976d2;
-  font-weight: 600;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
-  font-size: 1.12rem;
-  margin-top: 8px;
+.plant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 16px;
+  background: #f5fff5;
+  box-shadow: 0 2px 10px #0001;
+  width: 110px;
+  height: 110px;
+  justify-content: center;
+  transition: background 0.5s;
+  position: relative;
 }
 
-.empty-state {
-  color: #b0b6be;
-  font-style: italic;
+.plant-emoji {
+  font-size: 2.7em;
+  margin-bottom: 6px;
+  transition: filter 0.5s;
+}
+.plant-name {
+  font-size: 1em;
+  color: #23782d;
   text-align: center;
-  margin: 30px 0;
-  font-size: 1.1rem;
+  font-weight: 500;
+}
+.plant-streak {
+  font-size: 0.95em;
+  color: #bf9000;
+  margin-top: 4px;
+}
+/* Neglected plant style */
+.plant.neglected {
+  background: #fff0f0;
+}
+.plant.neglected .plant-emoji {
+  filter: grayscale(1) brightness(0.7);
 }
 
-mat-list {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-mat-list-item {
-  /* Usuń display: flex z tego poziomu, bo domyślnie Angular Material używa tu <div> */
-  padding: 0 0 !important;
-  background: none;
-  box-shadow: none;
-  margin-bottom: 0;
-  min-height: unset;
-}
-
-.habit-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* Lista nawyków */
+.habits-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 0;
   width: 100%;
-  min-height: 56px;
-  padding: 8px 18px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 1px 7px 0 rgba(33, 150, 243, 0.07);
-  margin-bottom: 10px;
-  gap: 18px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-.left-group {
-  display: flex;
-  align-items: center;
-  flex: 1 1 0;
-  min-width: 0;
-  gap: 14px;
-}
-
-mat-checkbox {
-  margin-left: 0;
-}
-
-.habit-name {
-  font-weight: 500;
-  color: #222;
-  font-size: 1.13em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  letter-spacing: 0.5px;
-  max-width: 230px;
-}
-
-.right-group {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-left: 12px;
-}
-
-.streak {
-  color: #ff9800;
-  font-weight: 500;
+.habits-list li {
+  padding: 10px 4px;
+  border-bottom: 1px solid #e0e0e0;
   font-size: 1.1em;
-  min-width: 48px;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
 }
-
-button[mat-icon-button] {
-  color: #d32f2f;
-  margin: 0;
+.streak-mark {
+  margin-left: 10px;
+  color: #ff9800;
+  font-weight: bold;
+  font-size: 1em;
+}
+.remove-btn {
+  margin-left: 10px;
+  background: #fff4f4;
+  color: #c00;
+  border: 1px solid #faa;
+  border-radius: 8px;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 0.97em;
+}
+.no-habits {
+  margin: 24px 0;
+  text-align: center;
+  color: #888;
+  font-size: 1.15em;
 }

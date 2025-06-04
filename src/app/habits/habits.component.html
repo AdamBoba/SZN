@@ -1,27 +1,35 @@
-<mat-card>
-  <div mat-card-title>Twoje nawyki</div>
-  <ng-container *ngIf="habits.length; else empty">
-    <mat-list>
-      <mat-list-item *ngFor="let habit of habits; index as i">
-        <div class="habit-row">
-          <div class="left-group">
-            <mat-checkbox
-              [checked]="isDoneToday(habit)"
-              (change)="habitToggled.emit(i)">
-            </mat-checkbox>
-            <span class="habit-name">{{ habit.name }}</span>
-          </div>
-          <div class="right-group">
-            <span class="streak">🔥 {{ habit.streak }}</span>
-            <button mat-icon-button color="warn" (click)="habitRemove.emit(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </div>
-      </mat-list-item>
-    </mat-list>
-  </ng-container>
-  <ng-template #empty>
-    <div class="empty-state">Brak nawyków. Dodaj swój pierwszy nawyk!</div>
-  </ng-template>
-</mat-card>
+<!-- WIRTUALNY OGRÓD -->
+<div class="garden" *ngIf="habits?.length">
+  <div
+    *ngFor="let habit of habits; let i = index"
+    class="plant"
+    [ngClass]="getPlantClass(habit)"
+    [title]="habit.name"
+  >
+    <div class="plant-emoji">{{ getPlantEmoji(habit) }}</div>
+    <div class="plant-name">{{ habit.name }}</div>
+    <div class="plant-streak">🔥 {{ habit.streak }}</div>
+  </div>
+</div>
+
+<!-- LISTA NAWYKÓW -->
+<ul class="habits-list" *ngIf="habits?.length; else emptyHabits">
+  <li *ngFor="let habit of habits; let i = index">
+    <label>
+      <input
+        type="checkbox"
+        [checked]="habit.lastDoneDate === today"
+        (change)="habitToggled.emit(i)"
+      />
+      {{ habit.name }}
+      <span class="streak-mark">🔥{{ habit.streak }}</span>
+      <button class="remove-btn" type="button" (click)="habitRemove.emit(i)">Usuń</button>
+    </label>
+  </li>
+</ul>
+
+<ng-template #emptyHabits>
+  <div class="no-habits">
+    Brak nawyków. Dodaj pierwszy nawyk, aby rozpocząć swój ogród!
+  </div>
+</ng-template>
