@@ -1,28 +1,27 @@
 <mat-card>
-    <div mat-card-title>Twoje nawyki</div>
-    <ng-container *ngIf="habits.length; else empty">
-      <mat-list>
-        <mat-list-item *ngFor="let habit of habits; index as i">
-          <div class="habit-container">
-            <div class="left-group">
-              <mat-checkbox
-                [checked]="isDoneToday(habit)"
-                (change)="habitToggled.emit(i)">
-              </mat-checkbox>
-              <span class="habit-name">{{ habit.name }}</span>
-            </div>
-            <div class="right-group">
-              <span class="streak">🔥 {{ habit.streak }}</span>
-              <button mat-icon-button color="warn" (click)="habitRemove.emit(i)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
+  <div mat-card-title>Twoje nawyki</div>
+  <ng-container *ngIf="habits.length; else empty">
+    <mat-list>
+      <mat-list-item *ngFor="let habit of habits; index as i">
+        <div class="habit-row">
+          <div class="left-group">
+            <mat-checkbox
+              [checked]="isDoneToday(habit)"
+              (change)="habitToggled.emit(i)">
+            </mat-checkbox>
+            <span class="habit-name">{{ habit.name }}</span>
           </div>
-        </mat-list-item>
-      </mat-list>
-    </ng-container>
-    <ng-template #empty>
-      <div class="empty-state">Brak nawyków. Dodaj swój pierwszy nawyk!</div>
-    </ng-template>
-  </mat-card>
-  
+          <div class="right-group">
+            <span class="streak">🔥 {{ habit.streak }}</span>
+            <button mat-icon-button color="warn" (click)="habitRemove.emit(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+  <ng-template #empty>
+    <div class="empty-state">Brak nawyków. Dodaj swój pierwszy nawyk!</div>
+  </ng-template>
+</mat-card>

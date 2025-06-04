@@ -8,5 +8,13 @@
     (habitToggled)="onHabitToggled($event)"
     (habitRemove)="onHabitRemove($event)">
   </app-habits>
+  <div class="badges" *ngIf="badges.length">
+    <h3>Odznaki:</h3>
+    <div class="badges-list">
+      <span *ngFor="let badge of badges" class="badge" [title]="badge.description">
+        {{badge.icon}} {{badge.name}}
+      </span>
+    </div>
+  </div>
   <router-outlet></router-outlet>
 </div>
