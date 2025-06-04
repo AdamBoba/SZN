@@ -28,6 +28,7 @@ export class AppComponent {
   xp = 0;
   lastSpinDay: string | null = null;
   lastQuote: string | null = null;
+  newBadge: Badge | null = null;
   today = new Date().toISOString().slice(0, 10);
 
   constructor() {
@@ -94,14 +95,36 @@ export class AppComponent {
       this.xp += +prize.value;
     }
     if (prize.type === 'badge') {
-      if (!this.badges.some(b => b.id === prize.value))
-        this.badges.push({ id: prize.value as string, name: prize.label, icon: '🎉', description: prize.label, condition: () => false });
+      if (!this.badges.some(b => b.id === prize.value)) {
+        // Utwórz badge dla animacji
+        const badge: Badge = {
+          id: prize.value as string,
+          name: prize.label,
+          icon: '🎉',
+          description: prize.label,
+          condition: () => false
+        };
+        this.badges.push(badge);
+        this.showBadgeAnimation(badge);
+      }
     }
     if (prize.type === 'quote') {
       this.lastQuote = prize.value as string;
     }
     this.lastSpinDay = this.today;
     this.save();
+  }
+
+  showBadgeAnimation(badge: Badge) {
+    this.newBadge = badge;
+    setTimeout(() => {
+      this.newBadge = null;
+    }, 2500);
+  }
+
+  resetAll() {
+    localStorage.clear();
+    location.reload();
   }
 
   private save() {
@@ -122,7 +145,7 @@ export class AppComponent {
     if (unlocked.length) {
       this.badges.push(...unlocked);
       this.save();
-      // Możesz dodać powiadomienie np. toast/snackbar
+      this.showBadgeAnimation(unlocked[0]);
     }
   }
 }

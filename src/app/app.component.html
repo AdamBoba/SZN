@@ -2,6 +2,9 @@
   <span>System Zarządzania Nawykami</span>
   <span style="flex:1 1 auto"></span>
   <span style="font-size: 1.1em; margin-right: 16px;">XP: {{ xp }}</span>
+  <button mat-stroked-button color="warn" (click)="resetAll()" style="margin-left:16px">
+    Resetuj wszystko
+  </button>
 </mat-toolbar>
 <div class="main-container">
   <app-habit-form (habitAdded)="onHabitAdded($event)"></app-habit-form>
@@ -23,4 +26,17 @@
     </div>
   </div>
   <router-outlet></router-outlet>
+</div>
+
+<!-- ANIMACJA ODZNAKI -->
+<div
+  class="badge-animation"
+  *ngIf="newBadge"
+>
+  <div class="badge-popup">
+    <div class="badge-emoji">{{ newBadge.icon }}</div>
+    <div class="badge-title">Odznaka zdobyta!</div>
+    <div class="badge-name">{{ newBadge.name }}</div>
+    <div class="badge-desc">{{ newBadge.description }}</div>
+  </div>
 </div>
